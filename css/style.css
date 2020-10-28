@@ -101,7 +101,7 @@ span {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #102733;
     color: #fff;
     transition: all 0.3s;
 }
@@ -171,7 +171,7 @@ span {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #283F4D;
 }
 
 #sidebar .sidebar-header strong {
@@ -189,7 +189,7 @@ span {
 /* Efeito em itens do menu quando passa o mouse*/
 
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: #102733;
     background: #fff;
     font-size: 0.9em;
 }
@@ -201,7 +201,7 @@ span {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background:#283F4D;
 }
 
 a[data-toggle="collapse"] {
@@ -219,7 +219,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: #283F4D;
 }
 
 ul.CTAs {
@@ -236,12 +236,12 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: #7386D5;
+    color: #102733;
 }
 
 a.article,
 a.article:hover {
-    background: #6d7fcc !important;
+    background: #283F4D !important;
     color: #fff !important;
 }
 
