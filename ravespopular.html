@@ -41,11 +41,11 @@
     <script src="https://compressjs.herokuapp.com/compress.js"></script>
 
     <!---------------------- Firebase --------------------------->
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
 
 </head>
 
@@ -247,14 +247,14 @@
     <div>
         <!-------- Adicionar ---------->
         <div class="modal fade" id="modalAdicionar" style="overflow-y:scroll;" data-backdrop="static" tabindex="-1"
-            role="dialog">
+            role="dialog" >
 
-            <div class="modal-dialog">
-                <div class="modal-content">
+            <div class="modal-dialog" >
+                <div class="modal-content" >
 
                     <!-------- Cabeçalho ---------->
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3"> Adicionar Evento</h4>
+                        <h4 style="font-family: 'Lobster'; color: #102733; font-size: xx-large;"> Adicionar Evento</h4>
                     </div>
 
                     <!-------- Corpo ---------->
@@ -339,7 +339,6 @@
                         <!-- Link Evento-->
                         <div class="forn-group">
 
-
                             <label for="adicionarLinkEvento"> Link Evento: </span> </label>
 
                             <input type="text" class="form-control" id="adicionarLinkEvento">
@@ -368,10 +367,11 @@
                         </div>
 
                         <!--Button-->
-                        <button type="button" class="btn btn-success btn-block"
-                            onclick="buttonAdicionarValidarCampos()">
-                            Salvar
-                        </button>
+                        <div class="col-12 buttons_effects">
+                            <a class="btn_effect effect" target="_blank" onclick="buttonAdicionarValidarCampos()">
+                                <span>Salvar</span>
+                            </a>
+                        </div>
 
                     </div>
 
@@ -396,7 +396,7 @@
 
                     <!-------- Cabeçalho ---------->
                     <div class="modal-header" style="padding: 35px 50px;">
-                        <h4 style="color: #448ed3;"> Alterar Evento</h4>
+                        <h4 style="font-family: 'Lobster'; color: #102733;"> Alterar Evento</h4>
                     </div>
 
                     <!-------- Corpo ---------->
@@ -607,6 +607,8 @@
             $("#imagemUploadAlterar").hide()
         })
     </script>
+
+    <script src="./js/ravepopular.js"></script>
 
 </body>
 
