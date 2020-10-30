@@ -349,6 +349,197 @@ function buttonAdicionarValidarCampos(){
 }
 
 
+//-------------------------------------------- Modal Alterar -----------------------------------------------------
+//--------- Limpar campos - usando pelo botao cancelar e pelo botao salvar
+function limparCamposAlterar(){
+
+    $("#imagemUploadAlterar").val("")
+    imagemSelecionada = null
+
+}
+
+//--------- Abrir modal
+function abrirModalAlterar(dados){
+
+    $("#modalAlterar").modal()
+
+    const id = document.getElementById("alterarID")
+    const nome = document.getElementById("alterarNome")
+    const localizacao = document.getElementById("alterarLocalizacao")
+    const data = document.getElementById("alterarData")
+    const detalhes = document.getElementById("alterarDetalhes")
+    const line = document.getElementById("alterarLine")
+    const imagem = document.getElementById("imagemAlterar")
+    const linkevento = document.getElementById("alterarLinkEvento")
+    const linkingresso = document.getElementById("alterarLinkIngresso")
+    const linkinstagram = document.getElementById("alterarLinkInstagram")
+
+    id.innerText = dados.id
+    nome.value = dados.nome
+    localizacao.value = dados.localizacao
+    data.value = dados.data
+    detalhes.value = dados.detalhes
+    line.value = dados.line
+    imagem.src = dados.url_imagem
+    linkevento.value = dados.linkevento
+    linkingresso.value = dados.linkingresso
+    linkinstagram.value = dados.linkinstagram
+
+    ravepopularSelecionadaAlterar = dados
+}
+
+function buttonAlterarValidarCampos(){
+
+    const id = document.getElementById("alterarID").innerHTML
+    const nome = document.getElementById("alterarNome").value
+    const localizacao = document.getElementById("alterarLocalizacao").value
+    const data = document.getElementById("alterarData").value
+    const detalhes = document.getElementById("alterarDetalhes").value
+    const line = document.getElementById("alterarLine").value
+    const linkevento = document.getElementById("alterarLinkEvento").value
+    const linkingresso = document.getElementById("alterarLinkIngresso").value
+    const linkinstagram = document.getElementById("alterarLinkInstagram").value
+
+    if(ravepopularSelecionadaAlterar.nome.trim() == nome.trim() &&
+    ravepopularSelecionadaAlterar.localizacao.trim() == localizacao.trim() &&
+    ravepopularSelecionadaAlterar.data.trim() == data.trim() && 
+    ravepopularSelecionadaAlterar.detalhes.trim() == detalhes.trim() && 
+    ravepopularSelecionadaAlterar.line.trim() == line.trim() &&
+    ravepopularSelecionadaAlterar.linkevento.trim() == linkevento.trim() &&
+    ravepopularSelecionadaAlterar.linkingresso.trim() == linkingresso.trim() &&
+    ravepopularSelecionadaAlterar.linkingresso.trim() == linkinstagram.trim() &&
+    imagemSelecionada == null){
+
+        abrirModalAlerta("Nenhum informação foi alterada")
+
+    }else if (id.trim() == "" || nome.trim() == "" || localizacao.trim() == "" || data.trim() == "" || detalhes.trim() == ""
+    || line.trim() == "" || linkingresso.trim() == "" || linkinstagram.trim() == ""){
+
+        abrirModalAlerta("Preencha todos os campos")
+
+    }else if(imagemSelecionada != null){// vamos executar se o usuario alterar a imagem (nome)
+
+        abrirModalProgress()
+        alterarImagemFirebase(id, nome, localizacao, data, detalhes, line, linkevento, linkingresso, linkinstagram)
+
+    }else {
+
+        abrirModalProgress()
+        alterarDadosFirebase(id, nome, localizacao, data, detalhes, line, linkevento, linkingresso, linkinstagram, ravepopularSelecionadaAlterar.url_imagem)
+
+    }
+}
+
+//--------- alterar imagem Firebase
+function alterarImagemFirebase(id, nome, localizacao, data, detalhes, line, linkevento, linkingresso, linkinstagram){
+
+    const nomeImagem = id
+    const upload = storage.child(nomeImagem).put(imagemSelecionada)
+    upload.on("state_changed", function(snapshot){
+
+    }, function(error) {
+
+        abrirModalAlerta("Error ao alterar Imagem")
+        removerModalProgress()
+
+    }, function() {
+
+        upload.snapshot.ref.getDownloadURL().then(function (url_imagem) {
+
+            alterarDadosFirebase(id, nome, localizacao, data, detalhes, line, linkevento, linkingresso, linkinstagram, url_imagem)
+
+        })
+    })
+}
+
+//--------- alterar dados Firebase
+function alterarDadosFirebase(id, nome, localizacao, data, detalhes, line, linkevento, linkingresso, linkinstagram, url_imagem){
+
+    const dados = {
+
+        id: id,
+        nome: nome,
+        localizacao: localizacao,
+        data: data,
+        detalhes: detalhes,
+        line: line,
+        linkevento: linkevento,
+        linkingresso: linkingresso,
+        linkinstagram: linkinstagram,
+        url_imagem: url_imagem
+    }
+
+    bd.doc(id).update(dados).then(function() {
+
+        $("#modalAlterar").modal("hide")
+        removerModalProgress()
+        limparCamposAlterar()
+        abrirModalAlerta("Sucesso ao Alterar Dados")
+
+    }).catch(function (error) {
+
+        removerModalProgress()
+        abrirModalAlerta("Erro ao Alterar Dados: " + error)
+
+    })
+}
+
+//-------------------------------------------- Modal Remover -----------------------------------------------------
+//--------- Abrir modal
+function abrirModalRemover(dados) {
+
+    $("#modalRemover").modal()
+    ravepopularSelecionadaRemover = dados
+
+}
+
+//--------- Click em botao de SIM na modal de remover
+function removerRavePopular(){
+
+    abrirModalProgress()
+    removerImagemFirebase()
+
+}
+
+
+//--------- Remover Imagem Firebase
+function removerImagemFirebase() {
+
+    const nomeImagem = ravepopularSelecionadaRemover.id
+    const imagem = storage.child(nomeImagem)
+
+    imagem.delete().then(function () {
+
+        removerDadosFirebase()
+
+    }).catch(function (error) {
+
+        removerModalProgress()
+        abrirModalAlerta("Erro ao Remover Imagem: " + error)
+
+    })
+}
+
+//--------- Remover Dados Firebase
+function removerDadosFirebase() {
+
+    const id = ravepopularSelecionadaRemover.id
+
+    bd.doc(id).delete().then(function() {
+
+        $("#modalRemover").modal("hide")
+        removerModalProgress()
+        abrirModalAlerta("Sucesso ao Remover Dados")
+
+    }).catch(function (error) {
+
+        removerModalProgress()
+        abrirModalAlerta("Erro ao Remover Dados: " + error)
+
+    })
+}
+
+
 //-------------------------------------------- Modal De ProgressBar -----------------------------------------------------
 function abrirModalProgress(){
 
