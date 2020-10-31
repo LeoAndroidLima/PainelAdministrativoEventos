@@ -1,0 +1,17 @@
+.background_header_index {
+  background-color: #0B0C13 !important;
+}
+
+.text_itens_nav_header {
+  color: #FFFFFF !important;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+
+.text_itens_nav_header:hover {
+  color: #FFA700 !important;
+  -webkit-transform: scale(0.94);
+          transform: scale(0.94);
+  opacity: 0.9;
+}
+/*# sourceMappingURL=principal.css.map */

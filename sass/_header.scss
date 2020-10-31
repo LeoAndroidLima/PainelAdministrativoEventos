@@ -1,0 +1,14 @@
+.background_header_index{
+    background-color: $preto_footer !important;
+}
+
+.text_itens_nav_header{
+    color: $branco_claro !important;
+    transition: all 0.8s ease;
+}
+
+.text_itens_nav_header:hover{
+    color: $laranja_secundary !important;
+    transform: scale(0.94);
+    opacity: 0.9;
+}

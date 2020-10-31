@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,AAAA,wBAAwB,CAAA;EACpB,gBAAgB,EDGL,OAAO,CCHc,UAAU;CAC7C;;AAED,AAAA,sBAAsB,CAAA;EAClB,KAAK,EDJM,OAAO,CCIG,UAAU;EAC/B,UAAU,EAAE,aAAa;CAC5B;;AAED,AAAA,sBAAsB,AAAA,MAAM,CAAA;EACxB,KAAK,EDJW,OAAO,CCIG,UAAU;EACpC,SAAS,EAAE,WAAW;EACtB,OAAO,EAAE,GAAG;CACf",
+    "sources": [
+        "principal.sass",
+        "_header.scss"
+    ],
+    "names": [],
+    "file": "principal.css"
+}
